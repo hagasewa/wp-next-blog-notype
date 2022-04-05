@@ -1,5 +1,5 @@
 import { PageContent } from "../../components/PageContent";
-import { PageTitle } from "../../components/Pagetitle";
+import { PageTitle } from "../../components/PageTitle";
 import { PageHeader } from "../../components/PageHeader";
 import { PowerFlame } from "../../components/PowerFlame";
 
