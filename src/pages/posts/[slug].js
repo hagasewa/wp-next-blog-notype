@@ -1,34 +1,59 @@
-import Link from "next/link";
+import { PageContent } from "../../components/PageContent";
+import { PageTitle } from "../../components/Pagetitle";
+import { PageHeader } from "../../components/PageHeader";
+import { PowerFlame } from "../../components/PowerFlame";
 
 export default function Post(data) {
   const post = data.post;
+  const pageHeaderProps = {
+    title: data.title,
+    nextPost: post.nextPost,
+    previousPost: post.previousPost,
+  };
 
   return (
     <div>
-      <h1>{post.title}</h1>
-      <article dangerouslySetInnerHTML={{ __html: post.content }}></article>
-      <Link href={"/"}>戻る</Link>
+      <PowerFlame>
+        <PageHeader {...pageHeaderProps} />
+        <PageTitle>{post.title}</PageTitle>
+        <PageContent>{post.content}</PageContent>
+      </PowerFlame>
     </div>
   );
 }
 
 export const getStaticProps = async (context) => {
-  const res = await fetch("http://52.194.243.12/graphql", {
+  const res = await fetch("https://hagasewa.com/NextJS/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
                 query SinglePost($id: ID!, $idType: PostIdType!) {
                     post(id: $id, idType: $idType) {
-                        title
-                        slug
-                        content
-                        featuredImage {
-                            node {
-                                sourceUrl
-                            }
+                      title
+                      content
+                      slug
+                      featuredImage {
+                        node {
+                          sourceUrl
                         }
+                      }
+                      nextPost {
+                        node {
+                          slug
+                          title
+                        }
+                      }
+                      previousPost {
+                        node {
+                          slug
+                          title
+                        }
+                      }
                     }
+                    allSettings {
+                    generalSettingsTitle
+                  }
                 }
             `,
       variables: {
@@ -43,12 +68,13 @@ export const getStaticProps = async (context) => {
   return {
     props: {
       post: json.data.post,
+      title: json.data.allSettings.generalSettingsTitle,
     },
   };
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://52.194.243.12/graphql", {
+  const res = await fetch("https://hagasewa.com/NextJS/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -57,13 +83,7 @@ export const getStaticPaths = async () => {
                 posts {
                     nodes {
                         slug
-                        content
                         title
-                        featuredImage {
-                            node {
-                                sourceUrl
-                            }
-                        }
                     }
                 }
             }
@@ -73,7 +93,6 @@ export const getStaticPaths = async () => {
 
   const json = await res.json();
   const posts = json.data.posts.nodes;
-
   const paths = posts.map((post) => ({
     params: { slug: post.slug },
   }));

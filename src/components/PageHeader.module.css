@@ -1,0 +1,20 @@
+.postLinkContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.prev {
+  text-align: left;
+  width:100%;
+}
+
+.title {
+  text-align: center;
+  width:100%;
+}
+
+.next {
+  text-align: right;
+  width:100%;
+}

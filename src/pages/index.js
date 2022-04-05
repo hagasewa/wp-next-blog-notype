@@ -1,11 +1,11 @@
 import Link from "next/link";
+import { Title } from "../components/Title";
 
-export default function Home({ posts }) {
-  console.log("posts:", posts);
+export default function Home({ posts,title }) {
   const { nodes } = posts;
   return (
     <div>
-      <h1>Hellow from the home page</h1>
+      <Title>{title}</Title>
       {nodes.map((post) => {
         return (
           <ul key={post.slug}>
@@ -20,7 +20,7 @@ export default function Home({ posts }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://52.194.243.12/graphql", {
+  const res = await fetch("https://hagasewa.com/NextJS/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -31,18 +31,21 @@ export const getStaticProps = async () => {
            title
           }
       }
+        allSettings {
+        generalSettingsTitle
+      }
      }
       `,
     }),
   });
 
   const json = await res.json();
-
+  
   const props = {
     props: {
       posts: json.data.posts,
+      title: json.data.allSettings.generalSettingsTitle,
     },
   };
-  console.log("getStaticProps:props:", props);
   return props;
 };
