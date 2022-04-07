@@ -14,9 +14,9 @@ export const PageHeader = ({ title,nextPost, previousPost }) => {
   };
   return (
     <div className={styles.postLinkContainer}>
-      <div className={styles.prev}>{previousPost ? previousLink() : null}</div>
-      <div className={styles.title}><Link href={"/"}>{title}</Link></div>
       <div className={styles.next}> {nextPost ? nextLink() : null}</div>
+      <div className={styles.title}><Link href={"/"}>{title}</Link></div>
+      <div className={styles.prev}>{previousPost ? previousLink() : null}</div>
     </div>
   );
 };

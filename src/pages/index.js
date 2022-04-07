@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BlogList } from "../components/BlogList";
 import { Title } from "../components/Title";
 
 const wpApi = process.env.WORDPRESS_GQL;
@@ -9,15 +10,7 @@ export default function Home({ posts, title }) {
   return (
     <div>
       <Title>{title}</Title>
-      {nodes.map((post) => {
-        return (
-          <ul key={post.slug}>
-            <li>
-              <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-            </li>
-          </ul>
-        );
-      })}
+      <BlogList nodes={nodes} />
     </div>
   );
 }
