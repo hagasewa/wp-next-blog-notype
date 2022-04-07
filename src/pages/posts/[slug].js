@@ -3,6 +3,8 @@ import { PageTitle } from "../../components/PageTitle";
 import { PageHeader } from "../../components/PageHeader";
 import { PowerFlame } from "../../components/PowerFlame";
 
+const wpApi = process.env.WORDPRESS_GQL;
+
 export default function Post(data) {
   const post = data.post;
   const pageHeaderProps = {
@@ -23,7 +25,7 @@ export default function Post(data) {
 }
 
 export const getStaticProps = async (context) => {
-  const res = await fetch("https://hagasewa.com/NextJS/graphql", {
+  const res = await fetch(wpApi, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -74,7 +76,7 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://hagasewa.com/NextJS/graphql", {
+  const res = await fetch(wpApi, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

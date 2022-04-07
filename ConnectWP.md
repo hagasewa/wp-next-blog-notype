@@ -8,6 +8,7 @@
 * ヘッドレスCMSとは
 * WordPressの設定
 * NextJSのコード解説
+* Vercelでのデプロイ
 
 ### やらないこと
 * NextJSの詳細説明
@@ -34,6 +35,7 @@ pageディレクトリ内にあるファイルがサイトの1ページとして
 
 ## ヘッドレスCMSとは
 コンテンツの管理と表示がセットになっているのが一般的なCMSでWPなど有名ですが、コンテンツ管理のみを行うシステムがヘッドレスCMSです。
+https://www.newt.so/docs/headless-cms
 [ヘッドレスCMS](https://images.blog.microcms.io/assets/f5d83e38f9374219900ef1b0cc4d85cd/400b0df2bec24bbd97510e80ec1e2bd1/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-04-30%2015.27.01.png)
 
 ### データのやりとり
@@ -50,8 +52,12 @@ APIの入出力によって管理画面のフォームを自由に設定する�
 
 
 ## WordPressの設定
-### WP GraphQL
+### プラグインをインストール
+* WP GraphQL
 WPのデータベースをGraphQLで操作できるプラグインをインストールします。
+
+* WP Webhooks
+投稿など特定の操作をした際に、デプロイするためのpostを送信するためのプラグインをインストールします。
 
 ### slugを変更
 投稿のタイトルが日本語だとpostのURLを表すslugも日本語になってしまうので、function.phpにslugを変更する関数を追加します。
@@ -111,4 +117,23 @@ pagesディレクトリ内のapiディレクトリにあるファイルがAPIの
 }`
 あくまでもおまけ程度なので、フロントとバックを繋ぐ程度のAPIが良いらしいです。
 
+## Vercelにデプロイ
+
+### Vercelとは
+NextJSを開発しているホスティング会社で、Git等と連動して自動でデプロイまでしてくれるホスティングサービスを提供しています。
+開発会社なので、NextJSを使う場合には、ほぼVercel一択になります。
+
+### New Project
+Vercelのアカウントを取得した後は、New Projectから、Github上のリポジトリを選択することで、デプロイが完了します。
+
+### 環境変数の設定
+Setting -> Environment Variables
+
+### デプロイHooksを発行
+Settings -> Git -> Deploy Hooks -> Create Hooks
+Hooks名とリポジトリブランチを選択
+
+
+## マイクロCMS
+国産のヘッドレスCMSを提供しているのがマイクロCMS
 

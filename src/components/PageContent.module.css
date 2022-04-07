@@ -1,3 +1,9 @@
 .content {
   font-size:x-large;
 }
+
+.content img {
+  max-width: 300px;
+  height:auto;
+  
+}
