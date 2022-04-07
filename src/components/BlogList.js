@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from "next/link";
-import styles from "./blogList.module.css"
+import styles from "./BlogList.module.css"
 
 export const BlogList = ({nodes}) => {
   return (

@@ -76,7 +76,11 @@ add_filter( 'wp_unique_post_slug', 'auto_post_slug', 10, 4  );
 ### 前の投稿と次の投稿
 WP GlaphQLの初期状態だと「前の投稿」や「次の投稿」への情報が取得できないため、下記のコードをfunction.phpに追加します。
 他にも色々な機能を利用できるようになります。
-[gql-functions.php ](https://github.com/funkhaus/fuxt-backend/blob/master/functions/gql-functions.php#L32-L146)
+[gql-functions.php ](   )
+
+### WordPressをCMSにする理由
+あくまでもWPの投稿データを流用する場合や、WPの操作に慣れている投稿者に対してのアプローチになります。また、格安で始められるので個人レベルなら採用理由の一つになりますが、なんだかんだでWPの知識は必要になりますので、知識の幅を結構必要とします。管理画面までカスタマイズできるレベルならオススメの一つになります。
+新規のプロジェクトで立ち上げるなら、ちゃんとしたヘッドレスCMSサーバーを利用したほうがUI/UXは向上します。
 
 
 ## NextJSのコード解説
